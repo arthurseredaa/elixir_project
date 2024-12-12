@@ -1,22 +1,13 @@
 defmodule ElixirProject do
-  @moduledoc """
-  Documentation for `ElixirProject`.
-  """
+  use Application
 
-  @doc """
-  Hello world.
+  def start(_type, _args) do
+    IO.puts(ElixirProject.hello_world());
 
-  ## Examples
-
-      iex> ElixirProject.hello()
-      :world
-
-  """
-  def hello do
-    :world
+    Supervisor.start_link([], strategy: :one_for_one)
   end
 
-  def sum(x, y) do
-    IO.puts(x + y)
+  def hello_world do
+    "Hello, world!"
   end
 end
