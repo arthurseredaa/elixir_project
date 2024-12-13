@@ -11,10 +11,9 @@ defmodule ElixirProject do
     name = "Caleb"
     status = Enum.random([:gold, :silver, :bronse])
 
-    if status === :gold do
-      IO.puts("Welcome to the fancy lounge, #{name}")
-    else
-      IO.puts("Get lost, #{name}")
+    case status do
+      :gold -> IO.puts("Welcome to the fancy lounge, #{name}")
+      _ -> IO.puts("Get out bruh")
     end
   end
 end
