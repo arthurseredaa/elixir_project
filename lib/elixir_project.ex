@@ -2,12 +2,19 @@ defmodule ElixirProject do
   use Application
 
   def start(_type, _args) do
-    IO.puts(ElixirProject.hello_world());
+    main()
 
     Supervisor.start_link([], strategy: :one_for_one)
   end
 
-  def hello_world do
-    "Hello, world!"
+  def main do
+    name = "Caleb"
+    status = Enum.random([:gold, :silver, :bronse])
+
+    if status === :gold do
+      IO.puts("Welcome to the fancy lounge, #{name}")
+    else
+      IO.puts("Get lost, #{name}")
+    end
   end
 end
