@@ -1,11 +1,3 @@
-defmodule Membership do
-  defstruct [:type, :price]
-end
-
-defmodule User do
-  defstruct [:name, :membership]
-end
-
 defmodule ElixirProject do
   use Application
 
@@ -19,32 +11,13 @@ defmodule ElixirProject do
   end
 
   def main do
-    gold_membership = %Membership{
-      type: :gold,
-      price: 50,
-    }
-    silver_membership = %Membership{
-      type: :silver,
-      price: 25,
-    }
-    bronze_membership = %Membership{
-      type: :bronze,
-      price: 10,
-    }
-    no_membership = %Membership{
-      type: :none,
-      price: 0,
-    }
+    correct = Enum.random(0..10)
+    user_guess = IO.gets("Guess the number between 0 and 10: ") |> String.trim() |> String.to_integer()
 
-    users = [
-      %User{name: "Caleb", membership: gold_membership},
-      %User{name: "Jacob", membership: silver_membership},
-      %User{name: "Alice", membership: bronze_membership},
-      %User{name: "Arthur", membership: no_membership}
-    ]
-
-    Enum.each(users, fn %User{name: name, membership: membership} ->
-      IO.puts("#{name} has a #{membership.type} membership, that cost #{membership.price}")
-    end)
+    if (user_guess == correct) do
+      IO.puts("You got it!🎉")
+    else
+      IO.puts("Correct answer is #{correct}\nTry next time🫣")
+    end
   end
 end
