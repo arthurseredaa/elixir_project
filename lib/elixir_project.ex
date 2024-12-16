@@ -10,19 +10,24 @@ defmodule ElixirProject do
     Supervisor.start_link([], strategy: :one_for_one)
   end
 
+  def get_numbers_from_user do
+    IO.puts("Write numbers separated by space.")
+    input_data = IO.gets("") |> String.trim()
+    String.split(input_data, " ") |> Enum.map(&String.to_integer/1)
+  end
+
+  def get_sum_and_average(numbers) do
+    sum = Enum.sum(numbers)
+    average = sum / Enum.count(numbers)
+
+    { sum, average }
+  end
+
   def main do
-    correct = Enum.random(0..10)
-    user_guess = IO.gets("Guess the number between 0 and 10: ") |> String.trim() |> Integer.parse()
+    numbers = get_numbers_from_user()
+    {sum, average} = get_sum_and_average(numbers)
 
-    case user_guess do
-      {result, _} ->
-        if result === correct do
-          IO.puts("You win!")
-        else
-          IO.puts("You lose! Guessed number is: #{correct}")
-        end
-
-      :error -> IO.puts("Incorrect answer format. Please, use only numbers")
-    end
+    IO.puts("Sum: #{sum}, average: #{average}")
+    IO.inspect(numbers)
   end
 end
